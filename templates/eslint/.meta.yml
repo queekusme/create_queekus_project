@@ -1,0 +1,10 @@
+---
+name: "eslint"
+priority: 0
+version: "^7.26.0"
+dependencies:
+  - external dev @typescript-eslint/parser ^4.22.1 noinclude
+  - external dev @typescript-eslint/eslint-plugin ^4.22.1 noinclude
+config_files:
+  - .eslintignore.template
+  - .eslintrc.json.template

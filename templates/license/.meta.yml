@@ -1,0 +1,7 @@
+---
+name: "license"
+no_install: true
+priority: 0
+version: ""
+config_files:
+  - LICENSE.txt.template

@@ -1,0 +1,16 @@
+const program = new Command();
+
+(async() => {
+    program
+        .version(JSON.parse((await fs.readFile(path.join(process.cwd(), "package.json"))).toString()).version, "-v, --version", "output the current version")
+        .argument('<required_argument>', 'a required argument')
+        .argument('[optional_argument]', 'an optional argument')
+        .argument('[additional...]', 'multiple additional arguments')
+        .option("-d, --debug", "an example option")
+        .requiredOption("-a, --another_debug", "an example required option")
+        .action((required_argument: string, optional_argument: string, additional: string[], options: OptionValues) =>
+        {
+{{index_content}}
+        })
+        .parse(process.argv);
+})();

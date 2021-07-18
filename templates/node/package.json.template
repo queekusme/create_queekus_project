@@ -1,0 +1,21 @@
+{
+    "name": "{{project_name}}",
+    "version": "0.0.1",
+    "description": "",
+    "scripts": {
+        "start": "node ./dist/index.js",
+        "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register 'tests/**/*.ts'",
+        "build": "npm run lint && tsc && npm run test",
+        "build:watch": "tsc -w",
+        "lint": "eslint .",
+        "lint:fix": "eslint . --fix"
+    },
+    "author": "{{whoami}}",
+    "license": "MIT",
+    "dependencies": {
+[[project_dependencies]]
+    },
+    "devDependencies": {
+[[project_dev_dependencies]]
+    }
+}

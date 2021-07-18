@@ -1,0 +1,30 @@
+{
+    "compilerOptions": {
+        "target": "es2019",
+        "moduleResolution": "node",
+        "module": "commonjs",
+        "declaration": true,
+        "noLib": false,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "sourceMap": true,
+        "pretty": true,
+        "allowUnreachableCode": false,
+        "allowUnusedLabels": false,
+        "noImplicitAny": true,
+        "noImplicitReturns": false,
+        "noImplicitUseStrict": false,
+        "outDir": "dist/",
+        "baseUrl": "src/",
+        "listFiles": false,
+        "noEmitHelpers": false,
+        "strictNullChecks": true
+    },
+    "include":[
+        "src/**/*.ts"
+    ],
+    "exclude":[
+        "node_modules"
+    ],
+    "compileOnSave": true
+ }

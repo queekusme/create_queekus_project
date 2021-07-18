@@ -1,0 +1,9 @@
+---
+name: "git"
+no_install: true
+priority: 0
+version: ""
+config_files:
+  - .gitignore.template
+commands:
+  - git init
