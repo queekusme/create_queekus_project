@@ -1,11 +1,12 @@
 ---
 name: "node"
 no_install: true
+no_default_include: true
 priority: 0
 version: ""
 dependencies:
   - external dev @types/node 16.3.2
-config_files:
+additional_files:
   - package.json.template
 commands:
   - npm install

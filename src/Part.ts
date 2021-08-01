@@ -7,10 +7,11 @@ interface IMetaRequired
     name: string;
     dev: boolean;
     no_install: boolean;
+    no_default_include: boolean;
     priority: number;
     version: string;
     part_files: string[];
-    config_files: string[];
+    additional_files: string[];
     additional_imports: string[];
     commands: string[];
 }
@@ -68,7 +69,7 @@ export default class Part
             : undefined;
         const config: Record<string, string> = {};
 
-        for(const file of (meta.config_files ?? []))
+        for(const file of (meta.additional_files ?? []))
         {
             const matches: string[] = file.split(" as ");
 

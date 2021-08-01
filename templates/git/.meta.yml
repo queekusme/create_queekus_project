@@ -1,9 +1,10 @@
 ---
 name: "git"
 no_install: true
+no_default_include: true
 priority: 0
 version: ""
-config_files:
+additional_files:
   - .gitignore.template
 commands:
   - git init

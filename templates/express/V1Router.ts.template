@@ -1,0 +1,12 @@
+import * as express from "express";
+import { StatusCodes } from "http-status-codes";
+
+const router: express.Router = express.Router()
+
+router.get("/", (req: express.Request, res: express.Response) =>
+    res.send("Hello from API Version 1"));
+
+router.get("/teapot", (req: express.Request, res: express.Response) =>
+    res.status(StatusCodes.IM_A_TEAPOT).send("I am a v1 Teapot"));
+
+export default router;

@@ -16,6 +16,9 @@ export default class ProjectIndexFile extends ProjectFile
     public async make(): Promise<void>
     {
         this.replacements["index_imports"] = [
+            ...this.parts
+                .filter((part: Part) => !part.meta.no_default_include)
+                .map((part: Part) => `import * as ${part.meta.name} from "${part.meta.name}";`),
             ...this.parts.map((part: Part) => (part.meta.dependencies ?? [])
                 .filter((dep: IMetaDependency) => !(dep.noinclude === true || dep.dev === true))
                 .sort((depA: IMetaDependency, depB: IMetaDependency) => depB.package.localeCompare(depA.package))

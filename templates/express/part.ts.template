@@ -1,0 +1,13 @@
+const app: express.Express = express();
+
+const port: number = 8080;
+
+app.use(bodyParser.json());
+app.get("/", (req: express.Request, res: express.Response) => res.send("Hello World!"));
+app.get("/teapot", (req: express.Request, res: express.Response) => res.status(StatusCodes.IM_A_TEAPOT).send("I am a Teapot!"));
+
+app.use(apiRouter);
+
+app.listen(port, () => {
+    console.log( `Project started at http://localhost:${ port }` );
+});

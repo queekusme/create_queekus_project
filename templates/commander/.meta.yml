@@ -8,5 +8,3 @@ dependencies:
   - builtin - path
 part_files:
   - part.ts.template
-additional_imports:
-  - import { Command, OptionValues } from "commander";

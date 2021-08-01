@@ -1,7 +1,8 @@
 ---
 name: "license"
 no_install: true
+no_default_include: true
 priority: 0
 version: ""
-config_files:
+additional_files:
   - LICENSE.txt.template

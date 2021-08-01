@@ -1,9 +1,10 @@
 ---
 name: "dotenv"
 priority: 100
+no_default_include: true
 version: "^10.0.0"
-config_files:
+part_files:
+  - part.ts.template
+additional_files:
   - .env.template as .env
   - .env.template as .env.template
-additional_imports:
-  - require('dotenv').config()
