@@ -14,6 +14,7 @@ interface IMetaRequired
     additional_files: string[];
     additional_imports: string[];
     commands: string[];
+    cross_template_replacements: Record<string, string[]>;
 }
 
 interface IUnparsedMeta extends IMetaRequired

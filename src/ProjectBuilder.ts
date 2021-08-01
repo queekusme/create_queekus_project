@@ -8,6 +8,8 @@ import Part, { IMetaDependency, MetaDependencyType } from "./Part";
 import Templates from "./Templates";
 import ProjectIndexFile from "./ProjectIndexFile";
 
+export type ReplacementsMap = Record<string, string | string[]>;
+
 export default class ProjectBuilder
 {
     protected additionals: string[] = [];
@@ -44,7 +46,7 @@ export default class ProjectBuilder
 
     public async build(): Promise<void>
     {
-        const globalValues: Record< string, string | string[]> = this.scrapeGlobalValues();
+        const globalValues: ReplacementsMap = this.scrapeGlobalValues();
 
         const files: ProjectFile[] = [
             new ProjectIndexFile(
@@ -78,9 +80,21 @@ export default class ProjectBuilder
         });
     }
 
-    private scrapeGlobalValues(): Record<string, string | string[]>
+    private scrapeGlobalValues(): ReplacementsMap
     {
-        return {
+        return this.parts.reduce((acc: ReplacementsMap, current: Part) => {
+            const additionalKeys: string[] = Object.keys(current.meta.cross_template_replacements ?? {});
+
+            for(const key of additionalKeys)
+            {
+                if(!(key in acc))
+                    acc[key] = current.meta.cross_template_replacements[key];
+                else
+                    (acc[key] as string[]).push(...current.meta.cross_template_replacements[key]);
+            }
+
+            return acc;
+        }, {
             "project_name": this.name,
             "whoami": os.userInfo().username,
             project_dependencies: [
@@ -101,7 +115,7 @@ export default class ProjectBuilder
                     .filter((dep: IMetaDependency) => dep.type === MetaDependencyType.External && dep.dev === true)
                     .map((dep: IMetaDependency) => ProjectBuilder.formatDependency(dep.package, dep.version))
             ]
-        };
+        });
     }
 
     public static formatDependency(packageName: string, version: string): string

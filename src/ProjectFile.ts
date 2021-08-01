@@ -1,12 +1,13 @@
 import * as fs from "fs-extra";
 import * as path from "path";
+import { ReplacementsMap } from "ProjectBuilder";
 
 export default class ProjectFile
 {
     constructor(
         protected relativePath: string,
         protected content: string,
-        protected replacements: Record<string, string | string[]>
+        protected replacements: ReplacementsMap
     ) {}
 
     public async make(): Promise<void>

@@ -8,3 +8,7 @@ dependencies:
   - builtin - path
 part_files:
   - part.ts.template
+additional_files:
+  - CommanderUtils.ts.template as src/utils/CommanderUtils.ts
+additional_imports:
+  - import * as CommanderUtils from "./utils/CommanderUtils";

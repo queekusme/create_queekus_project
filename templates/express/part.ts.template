@@ -1,6 +1,6 @@
 const app: express.Express = express();
 
-const port: number = 8080;
+const port: number = options.port ?? parseInt(process.env.PORT ?? "8080");
 
 app.use(bodyParser.json());
 app.get("/", (req: express.Request, res: express.Response) => res.send("Hello World!"));
@@ -9,5 +9,5 @@ app.get("/teapot", (req: express.Request, res: express.Response) => res.status(S
 app.use(apiRouter);
 
 app.listen(port, () => {
-    console.log( `Project started at http://localhost:${ port }` );
+    console.log( `Project started at http://localhost:${port}` );
 });
