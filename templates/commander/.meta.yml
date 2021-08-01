@@ -4,7 +4,7 @@ priority: 0
 version: "^8.0.0"
 dependencies:
   - external - fs-extra[fs] ^10.0.0
-  - external dev @types/fs-extra ^9.0.12 noinclude
+  - external dev @types/fs-extra ^9.0.12
   - builtin - path
 part_files:
   - part.ts.template

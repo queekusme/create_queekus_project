@@ -4,7 +4,7 @@ no_install: true
 priority: 0
 version: ""
 dependencies:
-  - external dev @types/node 16.3.2 noinclude
+  - external dev @types/node 16.3.2
 config_files:
   - package.json.template
 commands:

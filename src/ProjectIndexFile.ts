@@ -17,7 +17,7 @@ export default class ProjectIndexFile extends ProjectFile
     {
         this.replacements["index_imports"] = [
             ...this.parts.map((part: Part) => (part.meta.dependencies ?? [])
-                .filter((dep: IMetaDependency) => dep.noinclude !== true)
+                .filter((dep: IMetaDependency) => !(dep.noinclude === true || dep.dev === true))
                 .sort((depA: IMetaDependency, depB: IMetaDependency) => depB.package.localeCompare(depA.package))
                 .map((dep: IMetaDependency) => `import * as ${dep.as} from "${dep.package}";`)).flat(),
             "",

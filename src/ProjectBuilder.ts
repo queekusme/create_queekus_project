@@ -45,7 +45,6 @@ export default class ProjectBuilder
     public async build(): Promise<void>
     {
         const globalValues: Record< string, string | string[]> = this.scrapeGlobalValues();
-        console.log(globalValues);
 
         const files: ProjectFile[] = [
             new ProjectIndexFile(

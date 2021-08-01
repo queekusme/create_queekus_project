@@ -20,7 +20,6 @@ export default class ProjectFile
     protected processReplacements(raw: string): string
     {
         let valueReplacedContent: string = raw;
-        console.log(`Fucking up file: ${this.relativePath}`);
 
         for (const key of Object.keys(this.replacements)) {
             if (Array.isArray(this.replacements[key]))
