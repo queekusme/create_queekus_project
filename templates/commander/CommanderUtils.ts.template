@@ -4,7 +4,7 @@ export function parseAsInt(value: string): number
 {
     const parsed: number = parseInt(value);
     if(isNaN(parsed))
-        throw new commander.InvalidArgumentError('Port Number is invalid (Not a Number)');
+        throw new commander.InvalidArgumentError("Port Number is invalid (Not a Number)");
 
     return parsed;
 }

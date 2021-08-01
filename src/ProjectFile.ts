@@ -56,6 +56,9 @@ export default class ProjectFile
                 fileContents[i] = "    ".repeat(indentStack.reduce((a: number, b: number) => a + b, 0)) + fileContents[i];
         }
 
+        if(fileContents[fileContents.length -1].length > 0)
+            fileContents.push(""); // End of file newline enforcement
+
         this.content = fileContents.filter((line: string) => !line.match(indentIdentifier)).join("\n");
     }
 }

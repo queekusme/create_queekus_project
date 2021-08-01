@@ -1,7 +1,7 @@
 import * as express from "express";
 import { StatusCodes } from "http-status-codes";
 
-const router: express.Router = express.Router()
+const router: express.Router = express.Router();
 
 router.get("/", (req: express.Request, res: express.Response) =>
     res.send("Hello from API Version 1"));
