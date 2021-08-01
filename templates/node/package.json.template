@@ -14,8 +14,10 @@
     "license": "MIT",
     "dependencies": {
 [[project_dependencies]]
+
     },
     "devDependencies": {
 [[project_dev_dependencies]]
+
     }
 }

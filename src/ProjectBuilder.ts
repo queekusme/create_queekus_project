@@ -83,48 +83,22 @@ export default class ProjectBuilder
         return {
             "project_name": this.name,
             "whoami": os.userInfo().username,
-            project_dependencies_all: [
-                ...this.parts
-                    .filter((part: Part) => part.meta.dev !== true)
-                    .map((part: Part) => ProjectBuilder.formatDependency(part.meta.name, part.meta.version)),
-                ...this.parts
-                    .map((part: Part) => part.meta.dependencies)
-                    .flat()
-                    .filter((dep: IMetaDependency) => dep.dev !== true)
-                    .map((dep: IMetaDependency) => ProjectBuilder.formatDependency(dep.package, dep.version))
-            ],
-            project_dependencies_all_dev: [
-                ...this.parts
-                    .filter((part: Part) => part.meta.dev === true)
-                    .map((part: Part) => ProjectBuilder.formatDependency(part.meta.name, part.meta.version)),
-                ...this.parts
-                    .map((part: Part) => part.meta.dependencies)
-                    .flat()
-                    .filter((dep: IMetaDependency) => dep.dev === true)
-                    .map((dep: IMetaDependency) => ProjectBuilder.formatDependency(dep.package, dep.version))
-            ],
             project_dependencies: [
                 ...this.parts
-                    .filter((part: Part) => part.meta.no_install !== true)
-                    .filter((part: Part) => part.meta.dev !== true)
+                    .filter((part: Part) => part.meta.no_install !== true && part.meta.dev !== true)
                     .map((part: Part) => ProjectBuilder.formatDependency(part.meta.name, part.meta.version)),
                 ...this.parts
-                    .map((part: Part) => part.meta.dependencies)
-                    .flat()
-                    .filter((dep: IMetaDependency) => dep.type === MetaDependencyType.External)
-                    .filter((dep: IMetaDependency) => dep.dev !== true)
+                    .map((part: Part) => part.meta.dependencies).flat()
+                    .filter((dep: IMetaDependency) => dep.type === MetaDependencyType.External && dep.dev !== true)
                     .map((dep: IMetaDependency) => ProjectBuilder.formatDependency(dep.package, dep.version))
             ],
             project_dev_dependencies: [
                 ...this.parts
-                    .filter((part: Part) => part.meta.no_install !== true)
-                    .filter((part: Part) => part.meta.dev === true)
+                    .filter((part: Part) => part.meta.no_install !== true && part.meta.dev === true)
                     .map((part: Part) => ProjectBuilder.formatDependency(part.meta.name, part.meta.version)),
                 ...this.parts
-                    .map((part: Part) => part.meta.dependencies)
-                    .flat()
-                    .filter((dep: IMetaDependency) => dep.type === MetaDependencyType.External)
-                    .filter((dep: IMetaDependency) => dep.dev === true)
+                    .map((part: Part) => part.meta.dependencies).flat()
+                    .filter((dep: IMetaDependency) => dep.type === MetaDependencyType.External && dep.dev === true)
                     .map((dep: IMetaDependency) => ProjectBuilder.formatDependency(dep.package, dep.version))
             ]
         };
