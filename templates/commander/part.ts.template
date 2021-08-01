@@ -1,6 +1,7 @@
 const program = new commander.Command();
 
-(async() => {
+(async() =>
+{
     program
         .version(JSON.parse((await fs.readFile(path.join(process.cwd(), "package.json"))).toString()).version, "-v, --version", "output the current version")
         [[_commander_additional_optargs_]]
