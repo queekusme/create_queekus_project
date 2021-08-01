@@ -11,6 +11,7 @@ const program = new Command();
         .action((required_argument: string, optional_argument: string, additional: string[], options: OptionValues) =>
         {
 {{index_content}}
+
         })
         .parse(process.argv);
 })();

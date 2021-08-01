@@ -25,11 +25,11 @@ export default class ProjectFile
         for (const key of Object.keys(this.replacements)) {
             if (Array.isArray(this.replacements[key]))
             {
-                valueReplacedContent = valueReplacedContent.replace(new RegExp(`\\[\\[${key}\\]\\]`, "g"), (this.replacements[key] as string[]).join(",\n"));
-                valueReplacedContent = valueReplacedContent.replace(new RegExp(`\\[\\[_${key}_\\]\\]`, "g"), (this.replacements[key] as string[]).join("\n"));
+                valueReplacedContent = valueReplacedContent.replace(new RegExp(`\\[\\[${key}\\]\\]\n?`, "g"), (this.replacements[key] as string[]).join(",\n"));
+                valueReplacedContent = valueReplacedContent.replace(new RegExp(`\\[\\[_${key}_\\]\\]\n?`, "g"), (this.replacements[key] as string[]).join("\n"));
             }
             else
-                valueReplacedContent = valueReplacedContent.replace(new RegExp(`\\{\\{${key}\\}\\}`, "g"), this.replacements[key] as string);
+                valueReplacedContent = valueReplacedContent.replace(new RegExp(`\\{\\{${key}\\}\\}\n?`, "g"), this.replacements[key] as string);
         }
 
         return valueReplacedContent;

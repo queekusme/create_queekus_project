@@ -117,4 +117,4 @@ dist
 .pnp.*
 
 # Project
-lib
+test_project

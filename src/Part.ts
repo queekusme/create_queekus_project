@@ -45,7 +45,7 @@ export default class Part
 {
     constructor(
         public readonly meta: Readonly<IMeta>,
-        public readonly partData: string[],
+        public readonly partData: string | undefined,
         public readonly configData: Record<string, string>
     ) {}
 
@@ -63,13 +63,24 @@ export default class Part
 
 
         const meta: IMeta = await Part.collectMetadata(resolvedPath);
-        const parts: string[] = await Promise.all((meta.part_files ?? []).map(Part.collectFile.bind(Part, resolvedPath) as (file: string) => Promise<string>));
+        const parts: string | undefined = (meta.part_files ?? []).length > 0
+            ? (await Promise.all((meta.part_files).map(Part.collectFile.bind(Part, resolvedPath) as (file: string) => Promise<string>))).join("\n")
+            : undefined;
         const config: Record<string, string> = {};
 
-
-
         for(const file of (meta.config_files ?? []))
+        {
+            const matches: string[] = file.split(" as ");
+
+            if(matches.length > 1)
+            {
+                config[matches[1].trim()] = await Part.collectFile(resolvedPath, matches[0].trim());
+
+                continue;
+            }
+
             config[file.replace(".template", "")] = await Part.collectFile(resolvedPath, file);
+        }
 
         return new Part(meta, parts, config);
     }

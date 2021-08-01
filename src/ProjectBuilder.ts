@@ -32,7 +32,7 @@ export default class ProjectBuilder
     public templateParts(parts: Part[]): ProjectBuilder
     {
         this.parts.push(...parts);
-        this.parts.sort((a: Part, b: Part) => a.meta.priority - b.meta.priority);
+        this.parts.sort((a: Part, b: Part) => b.meta.priority - a.meta.priority);
 
         return this;
     }
