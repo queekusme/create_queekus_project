@@ -32,7 +32,6 @@ export default class ProjectIndexFile extends ProjectFile
             this.replacements["index_content"] = part.partData ?? "{{index_content}}";
             this.replacements["index_imports"] = [ "[[_index_imports_]]" ];
 
-            console.log(part.meta.name + "---" + this.replacements["index_content"])
             this.content = this.processReplacements(this.content);
         }
 
