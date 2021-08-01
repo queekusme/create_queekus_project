@@ -51,7 +51,8 @@ export default class ProjectFile
             if(indentTagMatches !== null)
                 indentStack.push(parseInt(indentTagMatches[1]));
 
-            fileContents[i] = "    ".repeat(indentStack.reduce((a: number, b: number) => a + b, 0)) + fileContents[i];
+            if(fileContents[i].length > 0)
+                fileContents[i] = "    ".repeat(indentStack.reduce((a: number, b: number) => a + b, 0)) + fileContents[i];
         }
 
         this.content = fileContents.filter((line: string) => !line.match(indentIdentifier)).join("\n");
