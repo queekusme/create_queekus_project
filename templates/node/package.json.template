@@ -13,11 +13,15 @@
     "author": "{{whoami}}",
     "license": "MIT",
     "dependencies": {
+__indent_2__
 [[project_dependencies]]
 
+__indent_-2__
     },
     "devDependencies": {
+__indent_2__
 [[project_dev_dependencies]]
 
+__indent_-2__
     }
 }

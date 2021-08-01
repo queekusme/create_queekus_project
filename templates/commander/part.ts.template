@@ -10,8 +10,10 @@ const program = new Command();
         .requiredOption("-a, --another_debug", "an example required option")
         .action((required_argument: string, optional_argument: string, additional: string[], options: OptionValues) =>
         {
+__indent_3__
 {{index_content}}
 
+__indent_-3__
         })
         .parse(process.argv);
 })();
