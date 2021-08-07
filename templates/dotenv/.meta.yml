@@ -1,6 +1,6 @@
 ---
 name: "dotenv"
-priority: 100
+priority: 9999
 no_default_include: true
 version: "^10.0.0"
 part_files:
