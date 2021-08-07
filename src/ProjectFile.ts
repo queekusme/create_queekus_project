@@ -48,7 +48,6 @@ export default class ProjectFile
 
     protected doReplace(replacement: Replacement, original: string, key: string, withReplacement: string | string[]): string
     {
-        console.log(`For ${key}: ${replacement.match(key)}`);
         return original.replace(replacement.match(key), Array.isArray(withReplacement) ? withReplacement.join(replacement.join) : withReplacement)
     }
 
