@@ -1,0 +1,13 @@
+---
+name: "winston"
+priority: 100
+version: "^3.2.1"
+part_files:
+  - part.ts.template
+additional_imports:
+  - import { createLogger, defaultFormat, LogFileNames } from "./utils/Logger";
+additional_files:
+  - Logger.ts.template as src/utils/Logger.ts
+cross_template_replacements:
+  logger_info: "Logger.info"
+  logger_error: "Logger.error"

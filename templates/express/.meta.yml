@@ -16,6 +16,6 @@ additional_imports:
   - import apiRouter from "./web/api";
 cross_template_replacements:
   commander_additional_optargs:
-    - ".option(\"-p, --port <port>\", \"the port to run the webserver on\", CommanderUtils.parseAsInt)"
+    - ".option(\"-p, --port <port>\", \"the port to run the webserver on\", CommanderUtils.parseAsInt, parseInt(process.env.PORT ?? \"8080\"))"
   dotenv_additional_env:
     - "PORT=8080"

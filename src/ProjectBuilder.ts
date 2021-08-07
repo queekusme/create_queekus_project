@@ -87,7 +87,7 @@ export default class ProjectBuilder
 
             for(const key of additionalKeys)
             {
-                if(!(key in acc))
+                if(!(key in acc) || !Array.isArray(acc[key]))
                     acc[key] = current.meta.cross_template_replacements[key];
                 else
                     (acc[key] as string[]).push(...current.meta.cross_template_replacements[key]);
@@ -114,7 +114,9 @@ export default class ProjectBuilder
                     .map((part: Part) => part.meta.dependencies).flat()
                     .filter((dep: IMetaDependency) => dep.type === MetaDependencyType.External && dep.dev === true)
                     .map((dep: IMetaDependency) => ProjectBuilder.formatDependency(dep.package, dep.version))
-            ]
+            ],
+            logger_info: "console.log",
+            logger_error: "console.error"
         });
     }
 

@@ -1,0 +1,4 @@
+const logFileNames: LogFileNames = { regular: "{{project_name}}.log", error: "{{project_name}}.error.log" };
+export const Logger: winston.Logger = createLogger(defaultFormat, logFileNames);
+
+{{index_content}}

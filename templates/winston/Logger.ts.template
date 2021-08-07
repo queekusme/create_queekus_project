@@ -1,0 +1,34 @@
+import * as winston from "winston";
+import * as logform from "logform";
+import * as path from "path";
+
+export const defaultFormat: logform.Format = winston.format.printf(({ level, message, timestamp }) => {
+    return `${timestamp} [${level.toUpperCase()}]: ${message}`;
+});
+
+export interface LogFileNames
+{
+    regular: string,
+    error: string
+}
+
+export function createLogger(formatFunction: logform.Format, logFileNames: LogFileNames, logsFolder: string = path.join(...[__dirname, "..", "..", "logs"])): winston.Logger
+{
+    return winston.createLogger({
+        format: winston.format.json(),
+        transports: [
+            new winston.transports.Console({ format: winston.format.combine(winston.format.timestamp(), formatFunction) }),
+            new winston.transports.File({
+                format: winston.format.combine(winston.format.timestamp(), formatFunction),
+                filename: path.join(logsFolder, logFileNames.regular)
+            }),
+            new winston.transports.File({
+                level: "error",
+                format: winston.format.combine(winston.format.timestamp(), formatFunction),
+                filename: path.join(logsFolder, logFileNames.error)
+            })
+            [[_winston_additional_transports_]]
+
+        ]
+    });
+}
