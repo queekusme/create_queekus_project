@@ -9,7 +9,7 @@ const program: commander.Command = new commander.Command();
 
 (async() => {
     program
-        .version(JSON.parse((await fs.readFile(path.join(process.cwd(), "package.json"))).toString()).version, "-v, --version", "output the current version")
+        .version(JSON.parse((await fs.readFile(path.join(__dirname, "..", "package.json"))).toString()).version, "-v, --version", "output the current version")
         .argument("<project_name>", "name of the project")
         .action(async (project_name: string, options: commander.OptionValues) =>
         {
