@@ -2,7 +2,9 @@
     "name": "create_queekus_project",
     "version": "0.0.1",
     "description": "",
-    "bin": "dist/index.js",
+    "bin": {
+        "qcreate": "dist/index.js"
+    },
     "scripts": {
         "start": "node ./dist/index.js",
         "test": "node ./dist/index.js --commander --dotenv --express test_project",
