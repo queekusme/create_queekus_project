@@ -23,10 +23,6 @@ export default class Templates
             .filter((folder: string) => Templates.required_Templates.indexOf(folder) === -1)
             .filter((folder: string) => Templates.templates_omit_from_optional.indexOf(folder) === -1);
 
-    /* [
-        "commander"
-    ]; */
-
     public static getPathForTemplate(template: string): string
     {
         return path.join(__dirname, "..", "templates", template);
