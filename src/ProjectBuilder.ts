@@ -88,9 +88,9 @@ export default class ProjectBuilder
             for(const key of additionalKeys)
             {
                 if(!(key in acc) || !Array.isArray(acc[key]))
-                    acc[key] = current.meta.cross_template_replacements[key];
+                    acc[key] = this.parseWrapper(current.resolvedPath, current.meta.cross_template_replacements[key]);
                 else
-                    (acc[key] as string[]).push(...current.meta.cross_template_replacements[key]);
+                    (acc[key] as string[]).push(...(this.parseWrapper(current.resolvedPath, current.meta.cross_template_replacements[key])));
             }
 
             return acc;
@@ -114,9 +114,20 @@ export default class ProjectBuilder
                     .map((part: Part) => part.meta.dependencies).flat()
                     .filter((dep: IMetaDependency) => dep.type === MetaDependencyType.External && dep.dev === true)
                     .map((dep: IMetaDependency) => ProjectBuilder.formatDependency(dep.package, dep.version))
-            ],
-            logger_info: "console.log",
-            logger_error: "console.error"
+            ]
+        });
+    }
+
+    private parseWrapper(templateDir: string, additionals: string | string[]): string[]
+    {
+        return (Array.isArray(additionals) ? (additionals) : [additionals]).map((additional: string) =>
+        {
+            const match: RegExpMatchArray | null = /file\(([^\)]+)\)/g.exec(additional);
+
+            if(match === null)
+                return additional;
+
+            return fs.readFileSync(path.join(templateDir, match[1])).toString(); // Sync as making this async would hurt me badly...
         });
     }
 

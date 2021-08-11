@@ -1,0 +1,6 @@
+import * as mongoose from "mongoose";
+
+export default mongoose.model("TestSchema", new mongoose.Schema({
+    name: String,
+    data: String
+}));

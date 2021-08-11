@@ -1,0 +1,6 @@
+await MongoDB.init({
+    host: process.env.DB_ADDR ?? "",
+    database: process.env.DB_DATABASE ?? ""
+});
+
+{{index_content}}

@@ -10,7 +10,8 @@ export default class Templates
         "typescript",
         "eslint",
         "git",
-        "license"
+        "license",
+        "winston"
     ];
     public static readonly templates_omit_from_optional: string[] = [
         "index.ts.template",

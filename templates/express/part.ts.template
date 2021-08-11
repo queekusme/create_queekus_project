@@ -7,6 +7,6 @@ app.get("/teapot", (req: express.Request, res: express.Response) => res.status(S
 
 app.use(apiRouter);
 
-app.listen(port, () => {{logger_info}}(`Project started at http://localhost:${port}`));
+app.listen(port, () => Logger.info(`Project started at http://localhost:${port}`));
 
 {{index_content}}

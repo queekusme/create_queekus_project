@@ -48,7 +48,8 @@ export default class Part
     constructor(
         public readonly meta: Readonly<IMeta>,
         public readonly partData: string | undefined,
-        public readonly configData: Record<string, string>
+        public readonly configData: Record<string, string>,
+        public readonly resolvedPath: string
     ) {}
 
     public static async load(...paths: string[]): Promise<Part[]>
@@ -84,7 +85,7 @@ export default class Part
             config[file.replace(".template", "")] = await Part.collectFile(resolvedPath, file);
         }
 
-        return new Part(meta, parts, config);
+        return new Part(meta, parts, config, resolvedPath);
     }
 
     private static async collectMetadata(resolvedPath: string): Promise<IMeta>

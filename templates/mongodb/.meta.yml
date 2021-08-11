@@ -1,0 +1,24 @@
+---
+name: "mongoose"
+no_default_include: true
+priority: 6999
+version: "^5.13.6"
+part_files:
+  - part.ts.template
+additional_files:
+  - TestSchema.ts.template as src/MongoSchema/TestSchema.ts
+  - MongoDB.ts.template as src/utils/MongoDB.ts
+additional_imports:
+  - import * as MongoDB from "./utils/MongoDB";
+cross_template_replacements:
+  express_additional_v1_imports:
+    - "import TestSchema from \"../../MongoSchema/TestSchema\";"
+    - "import { MongoDocument } from \"../../utils/MongoDB\";"
+  express_additional_v1_routes:
+    - "file(AdditionalRoutes.ts.template)"
+  dotenv_additional_env:
+    - "PORT=8080"
+    - "DB_ADDR=10.0.0.16:27017"
+    - "DB_DATABASE=test_database"
+    - "DB_USER="
+    - "DB_PASS="

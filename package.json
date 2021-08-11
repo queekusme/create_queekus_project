@@ -7,7 +7,7 @@
     },
     "scripts": {
         "start": "node ./dist/index.js",
-        "test": "node ./dist/index.js --commander --dotenv --express test_project",
+        "test": "node ./dist/index.js --commander --dotenv --express --mongodb test_project",
         "test_old": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register 'tests/**/*.ts'",
         "build": "npm run lint && tsc && npm run test",
         "build:watch": "tsc -w",

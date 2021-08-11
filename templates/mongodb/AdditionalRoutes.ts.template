@@ -1,0 +1,46 @@
+router.get("/test", async (req: express.Request, res: express.Response) =>
+{
+    try
+    {
+        const testEntries: MongoDocument[] = await TestSchema.find().exec();
+        res.status(StatusCodes.OK).json(testEntries);
+    }
+    catch(e)
+    {
+        res.status(StatusCodes.BAD_REQUEST).send(`Request failed: ${e.message}`);
+    }
+
+});
+
+router.get("/test/:name", async (req: express.Request, res: express.Response) =>
+{
+    const name: string = req.params.name;
+
+    try
+    {
+        const entry: MongoDocument | null = await TestSchema.findOne({ name }).exec();
+        res.status(StatusCodes.OK).json(entry);
+    }
+    catch(e)
+    {
+        res.status(StatusCodes.BAD_REQUEST).send(`Request failed: ${e.message}`);
+    }
+});
+
+router.post("/test", async (req: express.Request, res: express.Response) =>
+{
+    const name: string = req.body.name;
+    const data: string = req.body.data;
+
+    try
+    {
+        const schema = new TestSchema({ name, data });
+
+        await schema.save();
+        res.status(StatusCodes.OK).send("Entry Added successfully");
+    }
+    catch (e)
+    {
+        res.status(StatusCodes.BAD_REQUEST).send(`Request failed: ${e.message}`);
+    }
+});
