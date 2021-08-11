@@ -120,10 +120,6 @@ export default class ProjectBuilder
 
     private parseWrapper(templateDir: string, additionals: string | string[]): string[] | string
     {
-        const additionalWrapperFuncs: AdditionalWrapperfunc[] = [
-            new AdditionalWrapperfunc(/file\(([^\)]+)\)/, (match: RegExpExecArray) => fs.readFileSync(path.join(templateDir, match[1])).toString())
-        ];
-
         return (Array.isArray(additionals) ? (additionals) : [additionals]).map((additional: string) =>
         {
             return [
