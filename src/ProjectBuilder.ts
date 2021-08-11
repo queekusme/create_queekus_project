@@ -122,17 +122,38 @@ export default class ProjectBuilder
     {
         return (Array.isArray(additionals) ? (additionals) : [additionals]).map((additional: string) =>
         {
-            const match: RegExpMatchArray | null = /file\(([^\)]+)\)/g.exec(additional);
-
-            if(match === null)
-                return additional;
-
-            return fs.readFileSync(path.join(templateDir, match[1])).toString(); // Sync as making this async would hurt me badly...
+            return [
+                new AdditionalWrapperfunc(/file\(([^\)]+)\)/, (match: RegExpExecArray) => fs.readFileSync(path.join(templateDir, match[1])).toString())
+            ].find((matcher: AdditionalWrapperfunc) => matcher.willMatch(additional))?.process(additional) ?? additional;
         });
     }
 
     public static formatDependency(packageName: string, version: string): string
     {
         return `"${packageName}": "${version}"`;
+    }
+}
+
+class AdditionalWrapperfunc
+{
+    constructor(
+        protected match: RegExp,
+        protected replacer: (match: RegExpExecArray) => string
+    ) { }
+
+    public willMatch(raw: string): boolean
+    {
+        //console.log(this.match.test(raw));
+        return this.match.test(raw);
+    }
+
+    public process(raw: string): string
+    {
+        const match: RegExpExecArray | null = this.match.exec(raw);
+
+        if(match === null)
+            return raw;
+
+        return this.replacer(match);
     }
 }
