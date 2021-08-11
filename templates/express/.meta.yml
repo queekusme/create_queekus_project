@@ -19,3 +19,5 @@ cross_template_replacements:
     - ".option(\"-p, --port <port>\", \"the port to run the webserver on\", CommanderUtils.parseAsInt, parseInt(process.env.PORT ?? \"8080\"))"
   dotenv_additional_env:
     - "PORT=8080"
+  express_additional_port:
+    - "parseInt(process.env.PORT ?? \"8080\")"

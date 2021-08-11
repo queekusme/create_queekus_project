@@ -8,19 +8,36 @@ interface Replacement
     join?: string;
 }
 
+function makeReplacement(prefix: string, suffix: string, additional: string, join?: string): Replacement
+{
+    const escapedPrefix: string = `\\${prefix}\\${prefix}`;
+    const escapedSuffix: string = `\\${suffix}\\${suffix}`;
+    const escapedAdditional: string = additional !== "" ? `\\${additional}` : "";
+
+    return { match: (key: string) => new RegExp(`${escapedPrefix}${escapedAdditional}${key}${escapedAdditional}${escapedSuffix}\n?`, "g"), join };
+}
+
+type ShortReplacementCreator = (additional: string, join?: string) => Replacement;
+
+const makeArrayReplacement: ShortReplacementCreator = makeReplacement.bind(undefined, "[", "]");
+const makeObjectReplacement: ShortReplacementCreator = makeReplacement.bind(undefined, "{", "}");
+
 export default class ProjectFile
 {
     private readonly replacementData: Replacement[] = [
-        { match: (key: string) => new RegExp(`\\[\\[${key}\\]\\]\n?`, "g"), join: ",\n" },
-        { match: (key: string) => new RegExp(`\\[\\[_${key}_\\]\\]\n?`, "g"), join: "\n" },
-        { match: (key: string) => new RegExp(`\\{\\{${key}\\}\\}\n?`, "g") },
+        makeArrayReplacement("", ",\n"),
+        makeArrayReplacement("_", "\n"),
+        makeArrayReplacement("|", " || "),
+        makeArrayReplacement("&", " && "),
+        makeArrayReplacement("?", " ?? "),
+        makeObjectReplacement("")
     ];
 
     constructor(
         protected relativePath: string,
         protected content: string,
         protected replacements: ReplacementsMap
-    ) {}
+    ) { }
 
     public async make(): Promise<void>
     {

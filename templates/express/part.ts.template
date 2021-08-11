@@ -1,5 +1,5 @@
 const app: express.Express = express();
-const port: number = options.port;
+const port: number = [[?express_additional_port?]];
 
 app.use(bodyParser.json());
 app.get("/", (req: express.Request, res: express.Response) => res.send("Hello World!"));
