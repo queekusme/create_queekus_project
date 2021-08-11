@@ -143,7 +143,6 @@ class AdditionalWrapperfunc
 
     public willMatch(raw: string): boolean
     {
-        //console.log(this.match.test(raw));
         return this.match.test(raw);
     }
 
